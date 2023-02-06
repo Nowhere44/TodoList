@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:server": "nodemon server.js --ignore 'client/'",
+    "start:server": "noddemon server.js --ignore 'client/'",
     "start:client": ""
   },
   "keywords": [],

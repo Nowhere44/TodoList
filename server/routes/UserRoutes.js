@@ -12,18 +12,21 @@ const userRepository = require('../repositories/UserRepository')
  */
 
 // http://localhost:3000/api/users/
-userRoutes.get('/', (req, res) => {
-    userRepository.findAll()
-        .then((users) => {
-            res.json(users)
-        })
-        .catch((error) => console.log(error))
-});
+ userRoutes.get('/', (req, res) => {
+     userRepository.findAll()
+         .then((users) => {
+             res.json(users)
+         })
+         .catch((error) => console.log(error))
+ });
 
+userRoutes.get('/', (req, res) => {
+    res.send('API USERS Health Check OK')
+})
 // http://localhost:3000/api/users/
 userRoutes.post('/', (req, res) => {
-    const { firstName, lastName, email, password } = req.body
-
+    const { firstName, lastName, email, password } = req.body;
+    console.log('OK');
     /** @type { userPayloadType } */
     const newUserPayload = {
         firstName: firstName,
@@ -35,13 +38,14 @@ userRoutes.post('/', (req, res) => {
 
     userRepository.create(newUserPayload)
         .then((user) => {
+            console.log('OK');
             const responseUser = {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
                 id: user._id
             }
-            res.json(responseUser)
+            res.status(200).json(responseUser)
         })
         .catch((error) => console.log(error))
 })

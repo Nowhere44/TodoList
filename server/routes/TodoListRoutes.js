@@ -23,7 +23,7 @@ TodolistRoutes.get('/', (req, res) => {
 TodolistRoutes.post('/', (req, res) => {
     const { title, description, isCompleted } = req.body
 
-    /** @type { TodoListPayloadType } */
+    /** @type { TodolistPayloadType } */
     const newTaskPayload = {
         title: title,
         description: description,
@@ -33,11 +33,11 @@ TodolistRoutes.post('/', (req, res) => {
     TodolistRepositery.create(newTaskPayload)
         .then((task) => {
             const newTaskPayload = {
-                title: title,
-                description: description,
-                isCompleted: isCompleted,
+                title: task.title,
+                description: task.description,
+                isCompleted: task.isCompleted,
             }
-            res.json(responseTask)
+            res.json(newTaskPayload)
         })
         .catch((error) => console.log(error))
 })
